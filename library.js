@@ -6,6 +6,9 @@
   // 1: Number of dice, 2, dice value, 3, +/- something
   var diceRegex = /\/roll (\d*)d(\d*)((\+|\-)\d*)?/;
 
+  // Eventually the export object
+  var Roller = {};
+
   // A function to scrape the roll for the keys
   // Returns the randomized value
   var generateRoll = function(str) {
