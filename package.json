@@ -1,0 +1,26 @@
+{
+  "name": "nodebb-plugin-roller",
+  "version": "0.0.1",
+  "description": "NodeBB Dice Roller Plugin",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/connorhillen/nodebb-plugin-roller"
+  },
+  "keywords": [
+    "nodebb",
+  "plugin",
+  "dice",
+  "roll",
+  "rpg",
+  "random"
+    ],
+  "author": {
+    "name": "chillen",
+    "email": "connor.hillen@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/connorhillen/nodebb-plugin-roller/issues"
+  }
+}

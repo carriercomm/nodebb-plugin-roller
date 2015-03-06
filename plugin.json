@@ -1,0 +1,15 @@
+{
+  "id": "nodebb-plugin-roller",
+  "name": "NodeBB Dice Roller Plugin",
+  "description": "NodeBB Plugin which lets users use commends such as /roll 1d6 to generate random values.",
+  "url": "https://github.com/connorhillen/nodebb-plugin-roller",
+  "library": "./library.js",
+  "hooks": [
+  {
+    "hook": "filter:parse.post", "method": "parse", "priority": 6
+  }
+  ],
+    "css": [
+      "static/style.css"
+      ]
+}
