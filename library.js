@@ -32,12 +32,12 @@ var posts = require('../../src/posts')
       total += Math.floor((Math.random() * diceVal) + 1);
 
     // Give it a special class, so that it can be styled to show it's a roll
-    return { "query" : matched[0], "value" : total};
+    return { "query" : matched[0], "total" : total};
   }
 
   // Returns the span element given the original roll and the total value
-  var rollSpan = function(query, value) {
-    return "<span title='"+query+"' class='dice-roll'><img src='"+nconf.get('url')+"/plugins/nodebb-plugin-roller/static/dice.svg' class='dice-icon'></img>"+value+"</span>";
+  var rollSpan = function(query, total) {
+    return "<span title='"+query+"' class='dice-roll'><img src='"+nconf.get('url')+"/plugins/nodebb-plugin-roller/static/dice.svg' class='dice-icon'></img>"+total+"</span>";
   }
 
   Roller.parse = function(data, callback) {
@@ -46,13 +46,15 @@ var posts = require('../../src/posts')
     }
 
     if (data.postData.content.match(diceRegex)) {
-      if (!data.postData.roll) {
+      if (!data.postData.rollTotal) {
         var roll = generateRoll(data.postData.content);
-        posts.setPostField(data.postData.pid, "roll", roll.total, function() {});
-        data.postData.content = data.postData.content.replace(diceRegex, rollSpan(roll.query, roll.value));
+        posts.setPostField(data.postData.pid, "rollTotal", roll.total, function() {});
+        posts.setPostField(data.postData.pid, "rollQuery", roll.query, function() {});
+
+        data.postData.content = data.postData.content.replace(diceRegex, rollSpan(roll.query, roll.total));
       }
       else {
-        data.postData.content = data.postData.content.replace(diceRegex, rollSpan(data.postData.roll.query, data.postData.roll.value));
+        data.postData.content = data.postData.content.replace(diceRegex, rollSpan(data.postData.rollQuery, data.postData.rollTotal));
       }
     }
       callback(null, data);
