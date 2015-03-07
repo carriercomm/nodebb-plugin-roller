@@ -1,4 +1,6 @@
-var posts = require('../../src/posts');
+var posts = require('../../src/posts')
+  , nconf = require('nconf');
+
 
 (function(module) {
   // Dice roller formats
@@ -30,7 +32,7 @@ var posts = require('../../src/posts');
       total += Math.floor((Math.random() * diceVal) + 1);
 
     // Give it a special class, so that it can be styled to show it's a roll
-    return "<span title='"+matched[0]+"' class='diceRoll'>"+total+"</span>";
+    return "<span title='"+matched[0]+"' class='dice-roll'><img src='"+nconf.get('url')+"/plugins/nodebb-plugin-roller/static/dice.svg' class='dice-icon'></img>"+total+"</span>";
   }
 
   Roller.parse = function(data, callback) {

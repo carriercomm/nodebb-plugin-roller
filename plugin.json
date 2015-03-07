@@ -9,7 +9,10 @@
     "hook": "filter:parse.post", "method": "parse", "priority": 6
   }
   ],
+  "staticDirs": {
+    "static": "./static"
+  },
     "css": [
-      "static/style.css"
+      "./static/style.css"
       ]
 }
