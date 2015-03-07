@@ -1,6 +1,4 @@
-var posts = require('../../src/posts')
-  , nconf = require('nconf');
-
+var posts = require('../../src/posts');
 
 (function(module) {
   // Dice roller formats
