@@ -37,7 +37,7 @@ var posts = require('../../src/posts')
 
   // Returns the span element given the original roll and the total value
   var rollSpan = function(query, total) {
-    return "<span title='"+query+"' class='dice-roll'><img src='"+nconf.get('url')+"/plugins/nodebb-plugin-roller/static/dice.svg' class='dice-icon'></img>"+total+"</span>";
+    return "<span title='"+query+"' class='dice-roll'><img src='/plugins/nodebb-plugin-roller/static/dice.svg' class='dice-icon'></img>"+total+"</span>";
   }
 
   Roller.parse = function(data, callback) {
