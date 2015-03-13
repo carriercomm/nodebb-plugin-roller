@@ -44,19 +44,24 @@ var posts = require('../../src/posts');
     }
 
     if (data.postData.content.match(diceRegex)) {
-      if (!data.postData.rollTotal) {
-        var roll = generateRoll(data.postData.content);
-        posts.setPostField(data.postData.pid, "rollTotal", roll.total, function() {});
-        posts.setPostField(data.postData.pid, "rollQuery", roll.query, function() {});
+      posts.getPostField(data.postData.pid, "rollTotal", function(err, total) {
+        // No roll is presently set in the database
+        if (!total) {
+          var roll = generateRoll(data.postData.content);
+          posts.setPostField(data.postData.pid, "rollTotal", roll.total, function() {});
+          posts.setPostField(data.postData.pid, "rollQuery", roll.query, function() {});
 
-        data.postData.content = data.postData.content.replace(diceRegex, rollSpan(roll.query, roll.total));
-      }
-      else {
-        data.postData.content = data.postData.content.replace(diceRegex, rollSpan(data.postData.rollQuery, data.postData.rollTotal));
-      }
+          data.postData.content = data.postData.content.replace(diceRegex, rollSpan(roll.query, roll.total));
+        }
+        else {
+          posts.getPostField(data.postData.pid, "rollQuery", function(err, query) {
+            data.postData.content = data.postData.content.replace(diceRegex, rollSpan(query, total));
+          });
+        }
+      });
     }
-      callback(null, data);
-    };
+    callback(null, data);
+  };
 
     module.exports = Roller;
 }(module));
